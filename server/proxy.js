@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const config = require(path.join(__dirname, "../config/global.json"));
-// const { piCamera } = require("../dependancySwitch");
+const { piCamera } = require("../dependancySwitch");
 const camera = path.join(
   __dirname,
   "../" + config.Proxy.settings.pi_camera_path
@@ -18,10 +18,10 @@ const {
   handleCameraReqs,
 } = require("../handlers/cameraStream/handleCameraReqs");
 // http://localhost:8002/stream
-console.log("myArgs: ", utils.notOnPi());
+
 const { PiCamera } = piCamera;
-const x = new PiCamera({});
-x.snap().then((d) => console.log(d, "d"));
+// const x = new PiCamera({});
+// x.snap().then((d) => console.log(d, "Sad heman path if in dev"));
 
 /**
  *   camera

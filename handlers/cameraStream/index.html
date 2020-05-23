@@ -18,36 +18,36 @@
       const streamSocketConnections = io(
         `ws://${window.location.hostname}:8001/stream`
       );
-
-      streamSocketConnections.on("newImage", function (image) {
+      streamSocketConnections.emit("ready", { someConfig: "" });
+      streamSocketConnections.on("newImage", function (newsrc) {
         if ($("#dynamic")) {
           $("#dynamic").remove();
         }
 
         var img = $('<img id="dynamic">');
-        img.attr("src", image.cat);
+        img.attr("src", newsrc);
         img.appendTo("#imagediv");
       });
 
-      streamSocketConnections.emit("cat", {
-        cat:
-          "https://cdn.cnn.com/cnnnext/dam/assets/191024091949-02-foster-cat-exlarge-169.jpg",
-      });
-      streamSocketConnections.on("newImage", (data) => {
-        console.log(data);
-        setTimeout(() => {
-          socket.emit("cat", {
-            cat:
-              "https://www.aljazeera.com/mritems/imagecache/mbdxxlarge/mritems/Images/2020/4/13/ecab8c7af42a439d9043b0ade6e1f05b_18.jpg",
-          });
-        }, 100);
-        setTimeout(() => {
-          socket.emit("cat", {
-            cat:
-              "https://cdn.cnn.com/cnnnext/dam/assets/191024091949-02-foster-cat-exlarge-169.jpg",
-          });
-        }, 200);
-      });
+      //   streamSocketConnections.emit("cat", {
+      //     cat:
+      //       "https://cdn.cnn.com/cnnnext/dam/assets/191024091949-02-foster-cat-exlarge-169.jpg",
+      //   });
+      //   streamSocketConnections.on("newImage", (data) => {
+      //     console.log(data);
+      //     setTimeout(() => {
+      //       socket.emit("cat", {
+      //         cat:
+      //           "https://www.aljazeera.com/mritems/imagecache/mbdxxlarge/mritems/Images/2020/4/13/ecab8c7af42a439d9043b0ade6e1f05b_18.jpg",
+      //       });
+      //     }, 100);
+      //     setTimeout(() => {
+      //       socket.emit("cat", {
+      //         cat:
+      //           "https://cdn.cnn.com/cnnnext/dam/assets/191024091949-02-foster-cat-exlarge-169.jpg",
+      //       });
+      //     }, 200);
+      //   });
       // socket.emit('my other event', { my: 'data' });
     </script>
   </body>

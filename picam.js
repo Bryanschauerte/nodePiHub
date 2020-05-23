@@ -17,7 +17,7 @@ class PiCamera {
     this.snap = () => {
       const config = this.config || {
         mode: "photo",
-        output: `${__dirname}/test.jpg`,
+        output: `${__dirname}/public/test.jpg`,
         width: 640,
         height: 480,
         nopreview: true,
@@ -29,7 +29,7 @@ class PiCamera {
             fs.writeFile(`${__dirname}/public/test.jpg`, data, (err) => {
               if (err) return reject(err);
               console.log("The file has been saved!");
-              resolve(`${__dirname}/public/test.jpg`);
+              resolve(`test.jpg`);
             });
           }
         });

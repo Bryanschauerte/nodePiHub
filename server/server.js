@@ -10,6 +10,11 @@ const {
 const ProxyServer = "http://localhost:" + config.Proxy.settings.port;
 const { piCamera, pigpio } = require("../dependancySwitch");
 
+const { PiCamera } = piCamera;
+// // should pass config if not in dev
+// const piCameraInitiated = new PiCamera({});
+// x.snap().then((d) => console.log(d, "Sad heman path if in dev"));
+
 /**
  * Pin initializations, will be mapping pins to the global json
  */
@@ -48,7 +53,7 @@ const io = require("socket.io")(config.Server.settings.socket, {
 // handlers for the /stream sockets
 const allSockets = io.of("/stream").on("connection", (socket) => {
   // just for sockets connected to the /stream
-  handleCameraStreamSocket(socket, allSockets);
+  handleCameraStreamSocket(socket, allSockets, PiCamera);
 });
 
 allSockets.on("connection", function (socket) {
